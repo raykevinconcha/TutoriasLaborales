@@ -14,8 +14,13 @@ public class Tutor extends AppCompatActivity {
         setContentView(R.layout.activity_tutor);
 
         ImageButton descarga = findViewById(R.id.imagedescargalistadetrabajadores);
+        ImageButton asignar = findViewById(R.id.imageasignartutoria);
         descarga.setOnClickListener(view -> {
             Intent intent = new Intent(Tutor.this, Codigo_tutor.class);
+            startActivity(intent);
+        });
+        asignar.setOnClickListener(view -> {
+            Intent intent = new Intent(Tutor.this, Asignar.class);
             startActivity(intent);
         });
     }

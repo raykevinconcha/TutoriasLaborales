@@ -21,7 +21,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
-    String canal1 = "importanteDefault";
+    String canal1 = "importanteHigh";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         tutorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                notificarImportanceDefault();
+                notificarImportanceHigh();
                 Intent intent = new Intent(MainActivity.this, Tutor.class);
                 startActivity(intent);
 
@@ -52,9 +52,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void crearCanalesNotificacion() {
 
-        NotificationChannel channel = new NotificationChannel(canal1,
-                "Canal notificaciones default",
-                NotificationManager.IMPORTANCE_DEFAULT);
+        NotificationChannel channel = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            channel = new NotificationChannel(canal1,
+                    "Canal notificaciones high",
+                    NotificationManager.IMPORTANCE_HIGH);
+        }
         channel.setDescription("Canal para notificaciones con prioridad default");
 
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
@@ -71,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void notificarImportanceDefault(){
+    public void notificarImportanceHigh(){
 
         //Crear notificación
         Intent intent = new Intent(this, Tutor.class);
