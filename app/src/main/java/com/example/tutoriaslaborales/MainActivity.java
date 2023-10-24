@@ -22,6 +22,7 @@ import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
     String canal1 = "importanteHigh";
+    String canal3 = "importanteHigh";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         trabajadorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                notificartrabajador();
                 Intent intent = new Intent(MainActivity.this, Trabajador.class);
                 startActivity(intent);
             }
@@ -53,16 +54,21 @@ public class MainActivity extends AppCompatActivity {
     public void crearCanalesNotificacion() {
 
         NotificationChannel channel = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+        NotificationChannel channeltrabajador = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             channel = new NotificationChannel(canal1,
                     "Canal notificaciones high",
                     NotificationManager.IMPORTANCE_HIGH);
+            channeltrabajador = new NotificationChannel(canal3,
+                    "Canal notificaciones high",
+                    NotificationManager.IMPORTANCE_HIGH);
+            channel.setDescription("Canal para notificaciones con prioridad high");
+            channeltrabajador.setDescription("Canal para notificaciones con prioridad high");
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+            notificationManager.createNotificationChannel(channeltrabajador);
         }
-        channel.setDescription("Canal para notificaciones con prioridad default");
-
-        NotificationManager notificationManager = getSystemService(NotificationManager.class);
-        notificationManager.createNotificationChannel(channel);
-
         pedirPermisos();
     }
     public void pedirPermisos() {
@@ -84,6 +90,31 @@ public class MainActivity extends AppCompatActivity {
                 .setSmallIcon(R.drawable.tutor)
                 .setContentTitle("Está entrando en modo Tutor")
                 .setContentText("Aqui tendras 3 opciones")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
+        Notification notification = builder.build();
+
+        //Lanzar notificación
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+
+        if (ActivityCompat.checkSelfPermission(this, POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+            notificationManager.notify(1, notification);
+        }
+
+    }
+
+    public void notificartrabajador(){
+
+        //Crear notificación
+        Intent intent = new Intent(this, Tutor.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, canal3)
+                .setSmallIcon(R.drawable.estudiante)
+                .setContentTitle("Está entrando en modo Empleado")
+                .setContentText("nada")  //esvalua si tiene agendada y cambia el texto
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
