@@ -13,6 +13,7 @@ public class Tutor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutor);
 
+        ImageButton buscar = findViewById(R.id.imagebuscartrabajadores);
         ImageButton descarga = findViewById(R.id.imagedescargalistadetrabajadores);
         ImageButton asignar = findViewById(R.id.imageasignartutoria);
         descarga.setOnClickListener(view -> {
@@ -23,5 +24,11 @@ public class Tutor extends AppCompatActivity {
             Intent intent = new Intent(Tutor.this, Asignar.class);
             startActivity(intent);
         });
+        buscar.setOnClickListener(view -> {
+            Intent intent = new Intent(Tutor.this, BuscarTrabajador.class);  // Asume que la actividad se llama BuscarTrabajadorActivity. Cambia esto si es necesario.
+            startActivity(intent);
+        });
+
+
     }
 }

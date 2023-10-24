@@ -11,7 +11,7 @@
         android:id="@+id/textView1"
         android:layout_width="226dp"
         android:layout_height="158dp"
-        android:text="Ingre el codigo del tutor"
+        android:text="Ingrese el codigo del tutor"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="34sp"
