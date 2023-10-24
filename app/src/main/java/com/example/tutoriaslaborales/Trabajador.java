@@ -24,6 +24,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -49,6 +50,11 @@ public class Trabajador extends AppCompatActivity {
             }
                 }
         );
+        ImageButton feed = findViewById(R.id.imagefeedback);
+        feed.setVisibility(View.INVISIBLE); // valida si es que halla tenido o no para ponerlo visible o no
+        feed.setOnClickListener(view -> {
+                //aqui ingrese las opciones de guardar el feedback
+        });
     }
 
     public void descargarConDownloadManager(){
