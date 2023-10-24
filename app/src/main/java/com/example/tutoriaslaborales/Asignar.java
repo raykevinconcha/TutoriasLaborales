@@ -34,8 +34,8 @@ public class Asignar extends AppCompatActivity {
             if (!codigoText.isEmpty() && !codigo1Text.isEmpty()) {
                 int a = Integer.parseInt(codigoText);
                 int b = Integer.parseInt(codigo1Text);
-                if(a > b){
-                    notificarImportanceDefault();
+                if(a > b){ //colaca las validaciones aqui
+                    notificarImportanceDefault();  //fijate abajo cual noti es para cual
                 }else{
                     notificarImportanceDefault1();
                 }
